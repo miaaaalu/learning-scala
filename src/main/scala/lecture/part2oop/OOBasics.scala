@@ -25,43 +25,49 @@ object OOBasics extends App {
   person.greet()
 }
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-class novelAndWriter (first_name: String,
-                      surname: String,
-                      year: Int,
-                      novel_name: String,
-                      year_of_release: Int,
-                      author: String
-                     ) {
+/** PRACTICE NOVEL AND AUTHOR
+ * == RETURN AUTHOR FULL NAME
+ * == RETURN AUTHOR AGE
+ * == RETURN IF AUTHOR IS AUTHOR
+ * == RETURN A NEW INSTANCE WHEN YEAR CHANGED
+ */
+
+class Writer (first_name: String, surname: String, val year: Int) {
   // METHOD
-  def fullName(): Unit =
-      println(s"$first_name $surname")                // RETURN FULL NAME
-  def authorAge() =
-      println(year)                                   // RETURN AUTHOR AGE
-  def isWrittenByauthor() =
-      println(s"$first_name $surname" == s"$author")  // RETURN AUTHOR AGE
+  def fullName(): String = s"$first_name $surname"
+}
+
+class Novel (novel_name: String, year_of_release: Int, author: Writer) {
+  // METHOD
+  def authorAge() = year_of_release - author.year
+
+  def isWrittenByauthor(author: Writer) = author == this.author
+
+  def copy (newYear: Int): Novel = new Novel (novel_name, newYear, author)
+  //override def toString: String = s"Novel(name: $novel_name, year: $year_of_release, author: ${author.fullName()})"
+
 
 }
 
-object OObasics_novelAndWriter extends App {
-  val novelAndWriter = new novelAndWriter("Mia",
-                                          "Lu",
-                                          1992,
-                                          "Learning Scala",
-                                          2023,
-                                          "Mia Lu"
-  )
-  novelAndWriter.fullName()
-  novelAndWriter.authorAge()
-  novelAndWriter.isWrittenByauthor()
+object novelAndWriter extends App {
+  val author = new Writer("Mia", "Lu", 1992)
+
+  val novel = new Novel("Scala", 2023, author)
+
+  val updatedNovel = novel.copy(newYear = 45)
+
+  println(author.fullName())
+  println(novel.authorAge())
+  println(novel.isWrittenByauthor(author))
+  println(novel.copy(2028))
 }
 
-
-
-
-
+/** PRACTICE COUNTER
+ * == RETURN AUTHOR FULL NAME
+ * == RETURN AUTHOR AGE
+ * == RETURN IF AUTHOR IS AUTHOR
+ * == RETURN A NEW INSTANCE WHEN YEAR CHANGED
+ */
 
 
 /*
